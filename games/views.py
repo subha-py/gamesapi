@@ -5,7 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from games.models import Game
-from games.serializers import GameSerializer
+from games.serializers import GameModelSerializer as GameSerializer
 
 
 class JSONResponse(HttpResponse):

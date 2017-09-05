@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from games.models import Game
+
+
+# this is a normal serializer analogous to form.forms
 class GameSerializer(serializers.Serializer):
     pk = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=200)
@@ -17,3 +20,14 @@ class GameSerializer(serializers.Serializer):
         instance.played = validated_data.get('played', instance.played)
         instance.save()
         return instance
+
+class GameModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = [
+            'id',
+            'name',
+            'release_date',
+            'game_category',
+            'played',
+        ]
