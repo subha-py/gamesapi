@@ -6,3 +6,27 @@ Understanding:
     So to avoid that we have to use decorators.
 2) Content type in rest api:
     We also have to support different return types in rest api only application/json return in bad design.
+
+3) Using api_view decorator:
+    actually makes a subclass of rest_framework.views.APIView and it handles many thing like
+    
+    a. It responds with proper status code to unsupported request verbs.
+    
+    b. If request.data is used and parsers are not able to parse, then it will respond with proper status code.
+    
+    c. default parsers are jsonparser(application/json), formdata_parser(application/x-www-form-urlencoded), MultiPartParser(multipart/formdata).
+    
+    d. default renderers are JSON renderer(application/json) and Browsableapirenderer(text/html).
+    
+    e. DEFAULT_CONTENT_NEGOTATION_CLASS is the restframework.negotiation.DefaultContentNegotiation class.
+    This class helps to judge the request "accept" attribute and use proper renderers.
+    
+    f. csrf_exempt is also added
+    
+4) For request type form(application/x-www-form-urlencoded):
+    The request.data is passed to rest_framework.parsers.FormParser before going to serializer.
+    
+5) The browsable api will work after api_view decorator is added to a function, since it will
+    add the accept type text/html response after that.
+    
+6) Put vs Patch: Put means rewriting an existing row. Patch means updating one attribute of a row.
