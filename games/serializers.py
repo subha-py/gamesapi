@@ -6,8 +6,6 @@ from games.models import (
     PlayerScore
 )
 
-from games import views
-
 class GameCategorySerializer(serializers.HyperlinkedModelSerializer):
     games = serializers.HyperlinkedModelSerializer(
         many=True,
