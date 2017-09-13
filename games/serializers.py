@@ -7,7 +7,7 @@ from games.models import (
 )
 
 class GameCategorySerializer(serializers.HyperlinkedModelSerializer):
-    games = serializers.HyperlinkedModelSerializer(
+    games = serializers.HyperlinkedRelatedField(
         many=True,
         read_only=True,
         view_name='game-detail'
@@ -34,7 +34,7 @@ class GameSerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'game_category',
             'name',
-            'released_date',
+            'release_date',
             'played'
         )
 
@@ -87,3 +87,16 @@ class PlayerScoreSerializer(serializers.ModelSerializer):
             'player',
             'game'
         ]
+
+
+
+# http POST :8000/games/ name='Tetris Reloaded' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Puzzle Craft' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Blek' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Scribblenauts Unlimited' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Cut the Rope: Magic' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Tiny Dice Dungeon' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='A Dark Room' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Bastion' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Welcome to the Dungeon' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+# http POST :8000/games/ name='Dust: An Elysian Tail' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'

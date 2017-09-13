@@ -126,3 +126,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+        'games.pagination.LimitOffsetPaginationWithMaxLimit',
+    'PAGE_SIZE': 5
+}

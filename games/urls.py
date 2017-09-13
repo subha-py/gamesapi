@@ -19,7 +19,7 @@ urlpatterns = [
     ),
     url(
         r'^games/(?P<pk>[0-9]+)/$',
-        views.GameList.as_view(),
+        views.GameDetail.as_view(),
         name=views.GameDetail.name
     ),
     url(

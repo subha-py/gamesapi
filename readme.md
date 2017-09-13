@@ -30,3 +30,4 @@ Understanding:
     add the accept type text/html response after that.
     
 6) Put vs Patch: Put means rewriting an existing row. Patch means updating one attribute of a row.
+7) In serializers, the fields form modelserializers you don't want to include in post method, make them read_only=true.
