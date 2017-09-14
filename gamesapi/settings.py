@@ -127,8 +127,15 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
 
+
+# rest framework variable
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
         'games.pagination.LimitOffsetPaginationWithMaxLimit',
-    'PAGE_SIZE': 5
+    'PAGE_SIZE': 5,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    )
 }

@@ -6,6 +6,8 @@ from games.models import (
     PlayerScore
 )
 
+from django.contrib.auth.models import User
+
 class GameCategorySerializer(serializers.HyperlinkedModelSerializer):
     games = serializers.HyperlinkedRelatedField(
         many=True,
@@ -23,6 +25,9 @@ class GameCategorySerializer(serializers.HyperlinkedModelSerializer):
         )
 
 class GameSerializer(serializers.HyperlinkedModelSerializer):
+    # we just want to display the owner username (read - only)
+    owner = serializers.ReadOnlyField(source='owner.username')
+    # We want to display the game category's name instead of the id
     game_category =serializers.SlugRelatedField(
         queryset=GameCategory.objects.all(),
         slug_field='name'
@@ -32,6 +37,7 @@ class GameSerializer(serializers.HyperlinkedModelSerializer):
         model = Game
         fields = (
             'url',
+            'owner'
             'game_category',
             'name',
             'release_date',
@@ -88,15 +94,22 @@ class PlayerScoreSerializer(serializers.ModelSerializer):
             'game'
         ]
 
+class UserGameSerialzer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Game
+        fields = (
+            'url',
+            'name'
+        )
 
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    games = UserGameSerialzer(many=True,read_only=True)
 
-# http POST :8000/games/ name='Tetris Reloaded' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Puzzle Craft' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Blek' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Scribblenauts Unlimited' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Cut the Rope: Magic' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Tiny Dice Dungeon' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='A Dark Room' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Bastion' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Welcome to the Dungeon' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
-# http POST :8000/games/ name='Dust: An Elysian Tail' game_category='2D mobile arcade' played=false release_date='2016-06-21T03:02:00.776594Z'
+    class Meta:
+        model = User
+        fields = [
+            'url',
+            'pk',
+            'username',
+            'games'
+        ]
