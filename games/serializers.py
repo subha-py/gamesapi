@@ -37,7 +37,7 @@ class GameSerializer(serializers.HyperlinkedModelSerializer):
         model = Game
         fields = (
             'url',
-            'owner'
+            'owner',
             'game_category',
             'name',
             'release_date',
