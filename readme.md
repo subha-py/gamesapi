@@ -32,5 +32,7 @@ Understanding:
 6) Put vs Patch: Put means rewriting an existing row. Patch means updating one attribute of a row.
 7) In serializers, the fields form modelserializers you don't want to include in post method, make them read_only=true.
 8) throttling - if we want to group a number of view classes to server with a rate. We can do so by using throttle_scope 
-variable and sopedratethrottle, this will override the default and use the scope defined in throttle_scope
-used, which is again specified in settngs.py
+variable and scopedratethrottle, this will override the default and use the scope defined in throttle_scope
+used, which is again specified in settings.py
+
+9) profiling api and database, unblocking http,

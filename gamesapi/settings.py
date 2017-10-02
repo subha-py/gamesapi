@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')fq-#j+!dnnka-f(z^!=k5j5z8cvda3qh_9^@1j*587abo!1@#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -40,10 +40,10 @@ INSTALLED_APPS = [
     # third party apps
     'rest_framework',
     'crispy_forms',
+    'django_filters',
+    'django_nose',
     # user created application
     'games.apps.GamesConfig',
-
-
 ]
 
 MIDDLEWARE = [
@@ -138,7 +138,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS':(
         'rest_framework.filters.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
-        'rest_framework.filters.OrderingFilter'
+        'rest_framework.filters.OrderingFilter',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
@@ -154,3 +154,18 @@ REST_FRAMEWORK = {
         'game-categories':'30/hour',
     }
 }
+
+# django-nose settings
+
+# we want to use nose to run all the tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# we want nose to measure coverage on the games app
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-erase',
+    '--cover-inclusive',
+    '--cover-package=games',
+    '--verbosity=2'
+]
